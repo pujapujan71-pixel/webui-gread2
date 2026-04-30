@@ -14,3 +14,5 @@ function decrement() {
     counter--;
     document.getElementById('counter').textContent = counter;
 }
+
+setInterval(increment, 1000);
