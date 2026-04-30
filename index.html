@@ -1,11 +1,32 @@
 <html>
-    <head>
-        <title> web site</title>
-    </head>
-    <body> 
-        <h1 id="target" style=""><Hello word /h1>
+<head>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>My Web Page</title>
+</head>
+<body>
+    <section>
+        <h1 id="target">ゲスト</h1>
+        <button onclick="sayHello()">Click</button>
+    </section>
 
-            <script scr="main.js"></script>
-           </body>
+    <!-- counter section -->
+    <section>
+        <p id="counter">0</p>
+        <button onclick="increment()">+1</button>
+        <button onclick="decrement()">-1</button>
+        <button onclick="reset()">Reset</button>
+    </section>
 
+    <!-- image section -->
+    <section>
+        <img id="photo" src="assets/images/cat.jpg" width="320">
+        <button onclick="changePic()">切替</button>
+    </section>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/counter.js"></script>
+    <script src="assets/js/image.js"></script>
+
+    
+</body>
 </html>
