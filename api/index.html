@@ -4,14 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>poke API</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; text-align: center; background-color: #f4f4f9; padding: 20px; }
+        .game-card { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-width: 400px; margin: 0 auto; }
+        #pokemon-img { height: 200px; margin: 20px 0; transition: filter 0.4s ease; }
+        /* This class creates the silhouette effect */
+        .silhouette { filter: brightness(0); }
+        .controls { margin-top: 20px; }
+        input { padding: 10px; border-radius: 5px; border: 1px solid #ccc; width: 60%; }
+        button { padding: 10px 20px; border-radius: 5px; border: none; background: #ff1f1f; color: white; cursor: pointer; font-weight: bold; }
+        button:hover { background: #cc0000; }
+        .hidden { display: none; }
+        #section1-result { font-weight: bold; margin-top: 15px; min-height: 24px; }
+        .score-board { font-size: 1.2rem; margin-bottom: 10px; }
+    </style>
 </head>
 <body>
-    <!-- Section 1: ピカチュウの情報を取得する -->
-   <section>
-        <input id="name" placeholder="ポケモン名を入力">
-        <button id="section1-btn">検索</button>
-        <p id="section1-result"></p>
-    </section>
+    <div class="game-card">
+        <h1>Who's That Pokémon?</h1>
+        <div class="score-board">Score: <span id="score">0</span></div>
+        
+        <div id="image-container">
+            <img id="pokemon-img" src="" alt="???" class="silhouette">
+        </div>
+
+        <section>
+            <div id="guess-area">
+                <input id="name" placeholder="Enter name in English" autocomplete="off">
+                <button id="section1-btn">Guess!</button>
+            </div>
+            
+            <p id="section1-result"></p>
+            
+            <button id="next-btn" class="hidden">Next Pokémon →</button>
+        </section>
+    </div>
 
     <script src="script.js"></script> 
 </body>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>poke API</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; text-align: center; background-color: #f4f4f9; padding: 20px; }
+        .game-card { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            max-width: 400px; 
+            margin: 0 auto; 
+            transition: background-color 0.8s ease, transform 0.3s;
+            border: 8px solid #ffd700;
+        }
+        #pokemon-img { height: 220px; margin: 20px 0; transition: filter 0.5s ease; }
+        /* This class creates the silhouette effect */
+        .silhouette { filter: brightness(0); }
+        .controls { margin-top: 20px; }
+        input { padding: 12px; border-radius: 8px; border: 2px solid #ddd; width: 60%; font-size: 1rem; }
+        button { padding: 10px 20px; border-radius: 5px; border: none; background: #ff1f1f; color: white; cursor: pointer; font-weight: bold; }
+        button:hover { background: #cc0000; }
+        .hidden { display: none; }
+        #section1-result { font-weight: bold; margin-top: 15px; min-height: 50px; }
+        #options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .option-button {
+            padding: 12px; border-radius: 8px; border: 2px solid #ddd; background-color: #f0f0f0;
+            font-size: 1rem; cursor: pointer; transition: background-color 0.2s;
+        }
+        .option-button:hover:not(:disabled) { background-color: #e0e0e0; }
+        .option-button.correct { background-color: #aaffaa !important; border-color: #00aa00 !important; }
+        .option-button.incorrect { background-color: #ffaaaa !important; border-color: #aa0000 !important; }
+        #pokemon-display-name { color: #333; margin: 10px 0; font-size: 1.5rem; }
+        .score-board { font-size: 1.2rem; margin-bottom: 10px; }
+        #hint-text { font-style: italic; color: #666; font-size: 0.9rem; margin: 10px; padding: 10px; background: #eee; border-radius: 10px; }
+        .shiny-sparkle { animation: sparkle 0.5s infinite alternate; }
+        @keyframes sparkle { from { filter: brightness(1); } to { filter: brightness(1.5) drop-shadow(0 0 10px gold); } }
+    </style>
+</head>
+<body>
+    <div class="game-card">
+        <h1>Who's That Pokémon?</h1>
+        <div class="score-board">Score: <span id="score">0</span></div>
+        <h2 id="pokemon-display-name" class="hidden"></h2>
+        
+        <div id="image-container">
+            <img id="pokemon-img" src="" alt="???" class="silhouette">
+        </div>
+
+        <section>
+            <div id="options-container"></div>
+            
+            <p id="section1-result"></p>
+            <button id="hint-btn">ヒント（説明文）</button>
+            <div id="hint-text" class="hidden"></div>
+            
+            <button id="next-btn" class="hidden">Next Pokémon →</button>
+        </section>
+    </div>
+
+    <script src="script.js"></script> 
+</body>
+</html>
