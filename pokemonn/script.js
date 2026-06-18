@@ -149,5 +149,43 @@ btnHint.addEventListener('click', () => {
 
 btnNext.addEventListener('click', loadNewPokemon);
 
+// --- AI Integration to control the game ---
+let aiModel, webcam, lastTriggeredAI = "";
+
+async function initAI() {
+    const modelURL = "https://teachablemachine.withgoogle.com/models/MEwjs_vTQ/model.json";
+    const metadataURL = "https://teachablemachine.withgoogle.com/models/MEwjs_vTQ/metadata.json";
+    aiModel = await tmImage.load(modelURL, metadataURL);
+    
+    webcam = new tmImage.Webcam(150, 150, true);
+    await webcam.setup();
+    await webcam.play();
+    document.body.appendChild(webcam.canvas); // カメラを画面の隅に表示
+    loopAI();
+}
+
+async function loopAI() {
+    webcam.update();
+    await predictAI();
+    window.requestAnimationFrame(loopAI);
+}
+
+async function predictAI() {
+    const prediction = await aiModel.predict(webcam.canvas);
+    let found = "";
+    for (let i = 0; i < prediction.length; i++) {
+        if (prediction[i].probability > 0.90) found = prediction[i].className.toLowerCase();
+    }
+
+    // 'pen' を検知したら、次のポケモンを読み込む（Nextボタンの代わり）
+    if (found === 'pen' && found !== lastTriggeredAI) {
+        loadNewPokemon();
+        lastTriggeredAI = found;
+    } else if (!found) {
+        lastTriggeredAI = "";
+    }
+}
+
 // Start the game on load
 loadNewPokemon();
+initAI(); // ゲーム開始時にAIも起動
